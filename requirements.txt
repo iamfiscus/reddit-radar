@@ -1,0 +1,8 @@
+langgraph
+langsmith
+langchain-community
+langchain-core
+langchain-openai
+langchain-anthropic
+notebook
+praw
