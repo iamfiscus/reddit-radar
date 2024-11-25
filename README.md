@@ -19,7 +19,7 @@ $ cp .env.example .env
 
 > As a fun example, you can see [this repo](https://github.com/langchain-ai/ff-take-bot) that is configured to publish takes for Fantasy Football.
 
-![Screenshot 2024-11-24 at 8 25 59 PM](https://github.com/user-attachments/assets/577c1911-75f9-4db0-a143-66c35394960b)
+![Screenshot 2024-11-24 at 8 29 15 PM](https://github.com/user-attachments/assets/adf805dc-2ab7-4340-b02a-c6f09b9eed54)
 
 ## Motivation 
 
