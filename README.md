@@ -11,6 +11,16 @@ $ cp .env.example .env
 
 2. Load this folder in [LangGraph Studio](https://github.com/langchain-ai/langgraph-studio?tab=readme-ov-file#download) and run the graph. 
 
+3. Supply the subreddit that you want to monitor: 
+
+![Screenshot 2024-11-24 at 8 19 08 PM](https://github.com/user-attachments/assets/cfecaa0c-a540-4d2f-a007-077c48f87eae)
+
+4. Optionally, configure this as a cron job and publish to a desired destionation (e.g., Slack, etc)
+
+> As a fun example, you can see [this repo](https://github.com/langchain-ai/ff-take-bot) that is configured to publish takes for Fantasy Football.
+
+![Screenshot 2024-11-24 at 8 25 59 PM](https://github.com/user-attachments/assets/577c1911-75f9-4db0-a143-66c35394960b)
+
 ## Motivation 
 
 Keeping up with specific topics across Reddit's vast landscape can be overwhelming. While the platform offers incredible depth of discussion, understanding the community's perspective requires reading through countless posts and comments to gather meaningful context. Reddit Radar eliminates this manual effort, automatically scanning subreddits to deliver the insights you care about.
