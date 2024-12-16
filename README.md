@@ -1,52 +1,29 @@
 # Reddit Radar 🎯
 
-Reddit Radar is an AI agent that monitors subreddits for topics you care about, delivering curated insights with community context.
+Reddit Radar is an AI assistant that keeps you informed about topics that matter to you across Reddit. It intelligently monitors your chosen subreddits, scanning top post content and comments, then distills this information into concise, actionable summaries. These insights are automatically delivered to your Slack workspace, helping you stay on top of relevant conversations without getting lost in the noise.
 
-## Quickstart
+## 🚀 Quickstart
 
-1. Populate the `.env` file with you Reddit API credentials (see below) and model API key: 
+One option for publishing highlights from Reddit Radar is Slack. Follow the below instructions to set up the Slack webhook for a channel in your workspace. Set the Slack webhook along with other API keys after you clone the repository. Then, launch the assistant [with the LangGraph server](https://langchain-ai.github.io/langgraph/cloud/reference/cli/#dev):
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+git clone https://github.com/langchain-ai/reddit_radar.git
+cd reddit_radar
+cp .env.example .env
+uvx --refresh --from "langgraph-cli[inmem]" --with-editable . --python 3.11 langgraph dev
 ```
-$ cp .env.example .env
-```
 
-2. Load this folder in [LangGraph Studio](https://github.com/langchain-ai/langgraph-studio?tab=readme-ov-file#download) and run the graph. 
+You should see the following output and Studio will open in your browser:
 
-3. Supply the subreddit that you want to monitor: 
+- 🚀 API: http://127.0.0.1:2024
+- 🎨 Studio UI: https://smith.langchain.com/studio/?baseUrl=http://127.0.0.1:2024
+- 📚 API Docs: http://127.0.0.1:2024/docs
 
-![Screenshot 2024-11-24 at 8 19 08 PM](https://github.com/user-attachments/assets/cfecaa0c-a540-4d2f-a007-077c48f87eae)
-
-4. Optionally, configure this as a cron job and publish to a desired destionation (e.g., Slack, etc)
-
-> As a fun example, you can see [this repo](https://github.com/langchain-ai/ff-take-bot) that is configured to publish takes for Fantasy Football.
-
-![Screenshot 2024-11-24 at 8 29 15 PM](https://github.com/user-attachments/assets/adf805dc-2ab7-4340-b02a-c6f09b9eed54)
+In the `configuration` tab, add the subreddit and, optionally, default topics of interest.  
 
 ## Motivation 
 
-Keeping up with specific topics across Reddit's vast landscape can be overwhelming. While the platform offers incredible depth of discussion, understanding the community's perspective requires reading through countless posts and comments to gather meaningful context. Reddit Radar eliminates this manual effort, automatically scanning subreddits to deliver the insights you care about.
-
-## Overview
-
-| Phase | Objective | Reddit Radar Implementation |
-|-------|-----------|---------------------------|
-| Structure | How is the report organized? | Uses LLM to convert user topics into structured Take objects with title, observation, source URLs, and reasoning |
-| Research | What are the information sources? | Reddit API (PRAW) to fetch recent posts and top comments from specified subreddits |
-| Orchestration | How is report generation managed? | Three-phase LangGraph workflow: 1) Loading Reddit context, 2) Topic analysis and mapping, 3) Parallel insight generation per topic |
-| Reporting | How are insights presented? | Generates structured takes in a consistent format with source attribution |
-| UX | What is the user interaction pattern? | Ambient (asynchronous) agent where Reddit Radar will run in the background, with insights often published (e.g., to Slack, email, etc.) |
-
-1. `Inputs` - Reddit Radar requires only 2 inputs from users:
-   - A set of topics of interest that a user wants to monitor in a given subreddit (this can simply be natural language topics)
-   - A subreddit to monitor
-   
-2. `Topic parsing` - Reddit Radar first uses [tool calling](https://python.langchain.com/docs/concepts/tool_calling/) to convert the user's topics into a structured list of mutually exclusive topics. 
-
-3. `Generation of "takes"` - 
-   - Reddit Radar loads the context of the subreddit once
-   - It then uses a multi-agent workflow 
-   - Each agent is assigned a topic
-   - It will generate generate takes, which follow a user-specified structure, for each topic 
-   - All takes are published to the same output key in state 
+Reddit Radar is an AI agent that helps you stay informed about specific topics across Reddit's vast ecosystem. While Reddit organizes discussions into subreddits, the volume of posts and comments can be overwhelming. This tool automatically monitors your chosen subreddits, analyzes discussions for topics you care about, and delivers relevant insights through your preferred channel (Slack, email, etc.). It's like having a personal assistant that reads Reddit for you, focusing only on what matters to you.
 
 ## Setup Details
 
@@ -72,43 +49,18 @@ Add the following credentials to your environment:
 * `REDDIT_CLIENT_ID`
 * `REDDIT_CLIENT_SECRET`
 
-### Optional: Publishing to Slack
+### Publishing to Slack
 
-Since ambient agents work best when integrated into existing workflows, we publish the agent's insights directly to Slack where our team already communicates. To set up a webhook to publish to Slack:
+Since ambient newfeed agents like Reddit Radar work best when integrated into existing workflows, we publish takes insights directly to Slack. To set up a webhook to publish to Slack:
 
 1. Go to https://api.slack.com/apps
 2. Click "Create New App"
 3. Choose "From scratch"
-4. Name your app (e.g., "Take Bot") and select your workspace
+4. Name your app (e.g., "Reddit Radar") and select your workspace
 5. Once created, go to "Incoming Webhooks" in the left sidebar
 6. Toggle "Activate Incoming Webhooks" to On
 7. Click "Add New Webhook to Workspace"
 8. Choose the channel where you want the messages to appear
 9. Copy the "Webhook URL" that's generated
 
-Add add webhook URL credentials to your environment:
-
-* `REDDIT_RADAR_SLACK_URL` 
-
-Then, see our notebook for how to run the agent. 
-
-## Testing with the notebook
-
-Create your environment and run the notebook to test the graph and your Slack connection.
-```
-$ python3 -m venv take-bot-env
-$ source take-bot-env/bin/activate
-$ pip install -r requirements.txt
-$ jupyter notebook
-```
-
-## Running Studio 
-
-You can use the [LangGraph Studio](https://github.com/langchain-ai/langgraph-studio) desktop app to run the agent locally (on your own machine). 
-
-To do this, first [download](https://github.com/langchain-ai/langgraph-studio?tab=readme-ov-file#download) the desktop app and have [Docker Desktop](https://docs.docker.com/engine/install/) running. 
-
-Generate your `.env` file with the necessary credentials: 
-
-
-Load this folder in the Studio app to launch it.
+Add add webhook URL credentials to your environment variable `SLACK_WEBHOOK`. 

@@ -1,7 +1,7 @@
 {
     "dockerfile_lines": [],
     "graphs": {
-      "reddit_radar": "./reddit_radar.py:graph"
+      "reddit_radar": "src/agent/graph.py:graph"
     },
     "python_version": "3.11",
     "env": "./.env",

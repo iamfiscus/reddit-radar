@@ -11,6 +11,7 @@ class Configuration:
     """The configurable fields for the Reddit Radar."""
     user: str = "@rlm"
     subreddit_name: str = "LocalLLaMA" 
+    topics: str = "New models, local LLM use-cases" 
     reddit_timeframe: str = "day" # Time filter for top posts
     number_of_posts: int = 20 # Number of top posts to retrieve
     number_of_comments: int = 3 # Number of top comments to fetch for each post
