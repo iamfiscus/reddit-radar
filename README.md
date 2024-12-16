@@ -19,7 +19,13 @@ You should see the following output and Studio will open in your browser:
 - 🎨 Studio UI: https://smith.langchain.com/studio/?baseUrl=http://127.0.0.1:2024
 - 📚 API Docs: http://127.0.0.1:2024/docs
 
-In the `configuration` tab, add the subreddit and, optionally, default topics of interest.  
+Pass any topics of interest as a string:
+
+<img width="1512" alt="Screenshot 2024-12-15 at 8 28 42 PM" src="https://github.com/user-attachments/assets/1c7e2d34-45fa-49a5-a68d-dd6cc30f8ba1" />
+
+In the `configuration` tab, configure various parameters: 
+
+<img width="1512" alt="Screenshot 2024-12-15 at 8 28 57 PM" src="https://github.com/user-attachments/assets/687d14c6-a326-4fce-be65-950aefdbdf36" />
 
 ## Motivation 
 
@@ -64,3 +70,34 @@ Since ambient newfeed agents like Reddit Radar work best when integrated into ex
 9. Copy the "Webhook URL" that's generated
 
 Add add webhook URL credentials to your environment variable `SLACK_WEBHOOK`. 
+
+## Hosted Deployment
+
+Optionally, deploy your app to [LangGraph Cloud](https://langchain-ai.github.io/langgraph/concepts/langgraph_cloud/), a [managed service for running LangGraph graphs](https://langchain-ai.github.io/langgraph/concepts/deployment_options/#cloud-saas).
+
+This makes it easy to set up a [scheduled job](https://langchain-ai.github.io/langgraph/cloud/how-tos/cron_jobs/) to run the graph on a regular basis (e.g., daily) and publish the results to Slack.
+
+You can use the LangGraph Python SDK to create a scheduled job: 
+
+```
+from langgraph_sdk import get_client
+
+# URL from our LangGraph Cloud deployment
+deployed_url = "app-deployment-url"
+client = get_client(url=deployed_url)
+
+# An assistant ID is automatically created for each deployment
+await client.assistants.search(metadata={"created_by": "system"})
+
+# Set the assistant ID you want to create a cron job for
+assistant_id = 'xxx'
+
+# Use she SDK to schedule a cron job e.g., to run at 1:00 PM PST (21:00 UTC) every day
+cron_job_stateless = await client.crons.create(
+    assistant_id,
+    schedule="0 21 * * *",
+    input={"user_provided_topics": ""} 
+)
+```
+
+In this case, topics can be passed via `user_provided_topics` or added to the configuration.
