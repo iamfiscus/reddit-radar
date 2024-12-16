@@ -27,6 +27,10 @@ In the `configuration` tab, configure various parameters:
 
 <img width="1512" alt="Screenshot 2024-12-15 at 8 28 57 PM" src="https://github.com/user-attachments/assets/687d14c6-a326-4fce-be65-950aefdbdf36" />
 
+Slack posts:
+
+<img width="979" alt="Screenshot 2024-12-16 at 8 25 41 AM" src="https://github.com/user-attachments/assets/871239bb-70a1-4a19-8de6-49b651b6034b" />
+
 ## Motivation 
 
 Reddit Radar is an AI agent that helps you stay informed about specific topics across Reddit's vast ecosystem. While Reddit organizes discussions into subreddits, the volume of posts and comments can be overwhelming. This tool automatically monitors your chosen subreddits, analyzes discussions for topics you care about, and delivers relevant insights through your preferred channel (Slack, email, etc.). It's like having a personal assistant that reads Reddit for you, focusing only on what matters to you.
