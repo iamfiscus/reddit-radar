@@ -37,7 +37,7 @@ class TakeGeneratorState:
 
 @dataclass(kw_only=True)
 class OverallInputState:
-    user_provided_topics: str = field(default="AI") # User-provided topics     
+    user_provided_topics: str = field(default="") # User-provided topics     
 
 @dataclass(kw_only=True)
 class OverallState:

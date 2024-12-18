@@ -173,7 +173,7 @@ def write_to_slack(state: OverallState):
                 "type": "header",
                 "text": {
                     "type": "plain_text",
-                    "text": ":fire: :robot_face: Take-Bot is heating up ...",
+                    "text": ":fire: :robot_face: Reddit-Radar is heating up ...",
                     "emoji": true
                 }
             })
